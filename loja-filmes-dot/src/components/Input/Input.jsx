@@ -5,8 +5,8 @@ import InputMask from 'react-input-mask';
 
 export default function Input({ name, label, type, mask, ...rest }) {
     return (
-        <InputContainer>
-            <Field name={name} type={type} {...rest}
+        <InputContainer {...rest}>
+            <Field name={name} type={type}
                 render={({ field }) => (
                     <InputMask
                         {...field}

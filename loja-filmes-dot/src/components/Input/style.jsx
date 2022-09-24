@@ -1,15 +1,35 @@
 import styled from "styled-components"
-import { media } from "../../assets/styles/media"
 
 export const InputContainer = styled.div`
-    margin-top:100px;
     position:relative;
-    /* background-color:red; */
-    z-index:10;
-    height:30px ;
+    height:70px ;
+    display:block;
+
+    &.grande {
+        width:100%;
+    }
+
+    &.medio {
+        width:48%;
+    }
+
+    &.semi-grande{
+        width:60%;
+    }
+
+    &.pequeno {
+        width:35%;
+    }
+
+    
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset;
+    }
+
     input {
         position:absolute;
         padding:0 10px ;
+        width:100%;
         top:0;
         left:0; 
         height:37px;
@@ -38,17 +58,7 @@ export const InputContainer = styled.div`
         }
     }
 
-    input.grande {
-        width:100%;
-    }
-
-    input.medio {
-        width:40%;
-    }
-
-    input.pequeno {
-        width:25%;
-    }
+    
 
     label{
         font-size:20px;
@@ -62,8 +72,8 @@ export const InputContainer = styled.div`
     }
 
     span {
-        position:absolute;
-        top:40px ;
+        display:block ;
+        margin-top:40px ;
         color:red;
     }
 `
