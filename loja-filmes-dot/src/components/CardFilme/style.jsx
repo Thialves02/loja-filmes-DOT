@@ -9,6 +9,9 @@ export const CardContainer = styled.div`
     width:200px;
     background-color:#ffff;
     border:1px solid #c3cfd9 ;
+    margin:20px ;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
     h2 {
         text-align:center;
@@ -20,12 +23,12 @@ export const CardContainer = styled.div`
         margin-top:10px;
     }
 
-    ${media('tablet')}{
-        font-size:13px ;
-    }
-
     ${media('mobile')}{
-        font-size:12px ;
+        width:250px;
+
+        button {
+            width:100%;
+        }
     }
 `
 

@@ -26,6 +26,7 @@ export default function Filmes() {
                     data={filme.release_date}
                     generos={filme.genre_ids}
                     capa={filme.poster_path}
+                    capaMinificada={filme.backdrop_path}
                 />
             ))}
         </FilmesContainer>

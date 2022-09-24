@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons'
 import { Context } from '../../context/CtxApp'
 
-export default function CardFilme({ titulo, data, generos, nota, capa, key }) {
+export default function CardFilme({ titulo, data, generos, nota, capa, key, capaMinificada }) {
     const { filmeFav, setFilmeFav, filmeFavRemove, filmeCarrinho, setFilmeCarrinho, filmeCarrinhoRemove } = useContext(Context)
     const [dataFormatada, setDataFormatada] = useState('')
     const [preco, setPreco] = useState('')
@@ -69,13 +69,14 @@ export default function CardFilme({ titulo, data, generos, nota, capa, key }) {
 
         filmes.push({
             'titulo': titulo,
-            'capa': capa,
+            'capa': capaMinificada,
             'preco': preco,
             'id': key
         })
 
         return tipo == 'filmesFav' ? setFilmeFav(filmes) : setFilmeCarrinho(filmes)
     }
+
 
     return (
         <CardContainer key={key}>
@@ -93,7 +94,7 @@ export default function CardFilme({ titulo, data, generos, nota, capa, key }) {
                 <p>{generoTraduzido}</p>
             </InfosContainer>
 
-            <p>R$ {preco},99</p>
+            <p>R$ {preco},00</p>
             <Button
                 type={'text'}
                 name={'adicionaFilme'}

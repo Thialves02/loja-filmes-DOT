@@ -6,15 +6,10 @@ export const FilmesContainer = styled.main`
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
-    transition:10s;
-    background-color: #b44848;
     width:80%;
 
-    ${media('tablet')}{
-        font-size:13px ;
-    }
-
     ${media('mobile')}{
-        font-size:12px ;
+        width:100%;
+        justify-content:center;
     }
 `
