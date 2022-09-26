@@ -18,17 +18,17 @@ export default function Navbar() {
     //Menu lateral é fechado ao clicar novamente no icon em que foi clicado anteriormente
     //Ao trocar favoritos e carrinho o menu se mantem aberto trocando apenas o conteudo
     const menuLateral = (tipo) => {
-        if (tipo == 'favoritos') {
+        if (tipo === 'favoritos') {
             setAbreFavoritos(true)
             setAbreCarrinho(false)
         } else {
             setAbreCarrinho(true)
             setAbreFavoritos(false)
         }
-        if (iconSelecionado == '') {
+        if (iconSelecionado === '') {
             setAbreMenuLateral(0)
         } else {
-            if (tipo == iconSelecionado) {
+            if (tipo === iconSelecionado) {
                 setAbreMenuLateral(-420)
 
                 return setIconSelecionado('')
@@ -39,10 +39,12 @@ export default function Navbar() {
         setIconSelecionado(tipo)
     }
 
+    //Seta a quantidade de itens no icon do carrinho
     const qntdCarrinho = () => {
         return filmeCarrinho != null ? filmeCarrinho.length : 0
     }
 
+    //Função para voltar a rota Home e zera os filtros
     const voltaHome = () => {
         setHasMore(1)
         /* setPagina(2) */
@@ -56,9 +58,10 @@ export default function Navbar() {
         inputPesquisa.current.value = ''
     }
 
+    //Função para cancelar requests antigos ao fazer pesquisa por nome
     let cancelToken
     const buscaFilme = async (value) => {
-        console.log(value.target.value)
+        //A cada nova busca a pagína volta para o inicio e da um scroll to top
         setPagina(2)
         window.scrollTo({
             top: 0,
@@ -78,7 +81,6 @@ export default function Navbar() {
         } catch (e) {
             if (axios.isCancel(e)) return
         }
-        console.log(results.data)
         setFilmes(results.data.results)
     }
 
@@ -87,7 +89,7 @@ export default function Navbar() {
             <img src={logo} alt="logo" onClick={() => voltaHome()} />
             <InputContainer>
                 <input type='text' placeholder='Pesquisa' onChange={buscaFilme} ref={inputPesquisa} />
-                <FontAwesomeIcon icon={faMagnifyingGlass} onClick={() => console.log()} />
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
             </InputContainer>
             <IconsContainer>
                 <FontAwesomeIcon icon={faHeart} onClick={() => menuLateral('favoritos')} />

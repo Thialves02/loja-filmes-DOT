@@ -6,7 +6,7 @@ export const CheckoutContainer = styled.div`
     display:flex ;
     /* width:80%; */
     flex-wrap:wrap;
-    justify-content:space-around;
+    justify-content:space-evenly;
     align-items:center;
 
     ${media('desktop')}{

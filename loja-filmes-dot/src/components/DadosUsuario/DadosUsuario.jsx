@@ -7,7 +7,7 @@ import { InputsContainer } from './style';
 import { Context } from '../../context/CtxApp';
 
 export default function DadosUsuario() {
-    const { finalizaCompra, setDadosUsuario, dadosUsuario } = useContext(Context)
+    const { finalizaCompra, setDadosUsuario } = useContext(Context)
 
     const validacaoInputs = yup.object().shape({
         CPF: yup.string().required("O seu CPF é obrigatório").test(
@@ -22,10 +22,12 @@ export default function DadosUsuario() {
         estado: yup.string().required("O seu Estado é obrigatório"),
     })
 
+    //Validador de CPF
     const validarCPF = (num) => {
         return cpf.isValid(num);
     }
 
+    //Armazena o nome do usuário
     const salvaInfoUsuario = (formValues) => {
         setDadosUsuario(formValues.nome)
     }
@@ -45,7 +47,6 @@ export default function DadosUsuario() {
                     estado: ''
                 }}
                 onSubmit={(values, { resetForm }) => {
-                    console.log(values)
                     salvaInfoUsuario(values)
                     resetForm({ values: '' })
                 }}

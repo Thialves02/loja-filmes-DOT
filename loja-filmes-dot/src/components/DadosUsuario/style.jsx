@@ -5,9 +5,10 @@ export const InputsContainer = styled.div`
     display:flex ;
     flex-wrap:wrap;
     width:40vw ;
+    max-width:600px;
 
     h1 {
-        margin-bottom:20px ;
+        margin-bottom:30px ;
     }
 
     form {
@@ -23,6 +24,10 @@ export const InputsContainer = styled.div`
     }
 
     ${media('desktop')}{
-        width:70vw ;
+        width:80vw ;
+    }
+
+    ${media('mobile')}{
+        width:90vw ;
     }
 `

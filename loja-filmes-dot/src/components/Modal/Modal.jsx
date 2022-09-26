@@ -7,7 +7,10 @@ import { useNavigate } from 'react-router-dom';
 export default function Modal() {
     const { dadosUsuario, setDadosUsuario, filmeCarrinhoRemove } = useContext(Context)
     const navigate = useNavigate();
-    useEffect(() => { console.log(dadosUsuario) }, [dadosUsuario])
+
+    useEffect(() => {
+
+    }, [dadosUsuario])
 
     const finalizaCompra = () => {
         setDadosUsuario('')

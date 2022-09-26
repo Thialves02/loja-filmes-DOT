@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../context/CtxApp'
-import Button from '../Button/Button'
 import FilmeMinificado from '../FilmeMinificado/FilmeMinificado'
 import { FilmesContainer } from '../FinalizarCompra/style'
 import ValorTotal from '../ValorTotal/ValorTotal'
@@ -17,18 +16,22 @@ export default function MenuLateral() {
         valorTotal()
     }, [abreFavoritos, abreCarrinho, filmeCarrinho, filmeFav])
 
-    const teste = () => {
-        return abreFavoritos == true ? 'Meus Favoritos' : 'Meu carrinho'
+    //Função que verifica se o menuLateral aberto foi o favorito e altera o titulo
+    const tituloMenuLateral = () => {
+        return abreFavoritos === true ? 'Meus Favoritos' : 'Meu carrinho'
     }
 
+    //Verifica o tipo "favoritos" ou "carrinho" que será renderizado
     const verificaTipo = () => {
-        return abreFavoritos == true ? setTipo(filmeFav) : setTipo(filmeCarrinho)
+        return abreFavoritos === true ? setTipo(filmeFav) : setTipo(filmeCarrinho)
     }
 
+    //Verifica o tipo "favoritos" ou "carrinho" para limpar o LocalStorage
     const esvaziaFilmes = () => {
-        return abreFavoritos == true ? filmeFavRemove() : filmeCarrinhoRemove()
+        return abreFavoritos === true ? filmeFavRemove() : filmeCarrinhoRemove()
     }
 
+    //Faz o calculo do valor de todos os filmes
     const valorTotal = () => {
         setPrecoTotal(0)
         filmeCarrinho?.forEach((filme) => {
@@ -36,6 +39,7 @@ export default function MenuLateral() {
         })
     }
 
+    //Redireciona para a pagina de checkout e fecha o menu lateral
     const redirecionaCheckout = () => {
         navigate('/checkout')
         setAbreMenuLateral(-420)
@@ -44,28 +48,31 @@ export default function MenuLateral() {
     return (
         <MenuLateralContainer right={abreMenuLateral}>
             <MenuLateralInfos>
-                <h2>{teste()}</h2>
+                <h2>{tituloMenuLateral()}</h2>
                 <p onClick={() => esvaziaFilmes()}>Esvaziar</p>
             </MenuLateralInfos>
             <FilmesContainer>
                 {
                     tipo?.map((filme, index) =>
                         <FilmeMinificado
+                            key={index}
                             index={index}
                             titulo={filme.titulo}
                             capa={filme.capa}
                             preco={filme.preco}
+                            quantidade={filme.quantidade}
                             menuFav={abreFavoritos}
                         />
                     )
                 }
             </FilmesContainer>
             {
-                abreCarrinho == true && (
+                abreCarrinho === true && (
                     <ValorTotal
                         funcao={() => redirecionaCheckout()}
                         label={'Finalizar Compra'}
                         name={'finalizarCompra'}
+                        className={'menuLateral'}
                     />
                 )
             }
