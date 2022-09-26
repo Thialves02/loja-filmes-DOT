@@ -1,10 +1,10 @@
 import React from 'react'
-import { SemResultadoContainer } from './style'
+import { MensagemInformativaContainer } from './style'
 
-export default function BuscaSemResultado() {
+export default function MensagemInformativa({ label }) {
     return (
-        <SemResultadoContainer>
-            <p>A busca não retornou mais resultados!</p>
-        </SemResultadoContainer>
+        <MensagemInformativaContainer>
+            <p>{label}</p>
+        </MensagemInformativaContainer>
     )
 }
