@@ -10,7 +10,7 @@ export default function ValorTotal({ name, label, type, funcao, disabled, ...res
 
     //Verifica se existem filmes no carrinho
     const verificaCarrinho = () => {
-        return filmeCarrinho?.length === 0 || filmeCarrinho === undefined ? setCarrinhoVazio(true) : setCarrinhoVazio(false)
+        return filmeCarrinho?.length === 0 || filmeCarrinho === undefined || filmeCarrinho === null ? setCarrinhoVazio(true) : setCarrinhoVazio(false)
     }
 
     return (
