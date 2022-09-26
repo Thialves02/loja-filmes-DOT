@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Context } from '../../context/CtxApp'
 import Button from '../Button/Button'
-import { ModalContainer } from './style'
+import { ModalContainer, ModalConteudo } from './style'
 import { useNavigate } from 'react-router-dom';
 
 export default function Modal() {
@@ -19,14 +19,16 @@ export default function Modal() {
             {
                 dadosUsuario && (
                     <ModalContainer>
-                        <h2>Obrigado {dadosUsuario}!</h2>
-                        <p>Sua compra foi finalizada com sucesso!</p>
-                        <Button
-                            label={"Ir para loja"}
-                            name={"loja"}
-                            type={"button"}
-                            onClick={() => finalizaCompra()}
-                        />
+                        <ModalConteudo>
+                            <h2>Obrigado {dadosUsuario}!</h2>
+                            <p>Sua compra foi finalizada com sucesso!</p>
+                            <Button
+                                label={"Ir para loja"}
+                                name={"loja"}
+                                type={"button"}
+                                onClick={() => finalizaCompra()}
+                            />
+                        </ModalConteudo>
                     </ModalContainer>
                 )
             }
