@@ -1,36 +1,53 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../context/CtxApp'
-import Button from '../Button/Button'
+import MensagemInformativa from '../BuscaSemResultado/BuscaSemResultado'
 import FilmeMinificado from '../FilmeMinificado/FilmeMinificado'
 import ValorTotal from '../ValorTotal/ValorTotal'
-import { FilmesContainer, FinalizarCompraContainer } from './style'
+import { FilmesContainer, FinalizarCompraContainer, InfosContainer } from './style'
 
 export default function FinalizarCompra() {
-    const { filmeCarrinho, finalizaCompra, dadosUsuario, setDadosUsuario } = useContext(Context)
+    const { filmeCarrinho, finalizaCompra } = useContext(Context)
+    const [carrinhoVazio, setCarrinhoVazio] = useState()
 
+    useEffect(() => { verificaCarrinho() }, [filmeCarrinho])
+
+    //Validação para bloquear compra caso não exista itens no carrinho
+    const verificaCarrinho = () => {
+        return filmeCarrinho?.length === 0 || filmeCarrinho === null ? setCarrinhoVazio(true) : setCarrinhoVazio(false)
+    }
+
+    //Faz o submit do form
     const finalizaCompras = () => {
         finalizaCompra.current.click()
     }
 
     return (
         <FinalizarCompraContainer>
+            <InfosContainer>
+                <p>Imagem</p>
+                <p>Nome</p>
+                <p>Qtd</p>
+                <p>Preço</p>
+            </InfosContainer>
             <FilmesContainer>
                 {
-                    filmeCarrinho ?
-                        filmeCarrinho.map((filme, index) =>
-                            <>
-                                <FilmeMinificado
-                                    index={index}
-                                    titulo={filme.titulo}
-                                    capa={filme.capa}
-                                    preco={filme.preco}
-                                    menuFav={false}
-                                />
-                            </>
+                    !carrinhoVazio ?
+                        filmeCarrinho?.map((filme, index) =>
+                            <FilmeMinificado
+                                key={index}
+                                index={index}
+                                titulo={filme.titulo}
+                                capa={filme.capa}
+                                preco={filme.preco}
+                                quantidade={filme.quantidade}
+                                menuFav={false}
+                                className={'grande'}
+                            />
                         )
-
                         : (
-                            <h2>Você nao possui filmes no carrinho</h2>
+                            <MensagemInformativa
+                                label={'Você nao possui itens no carrinho!'}
+                            />
                         )
                 }
             </FilmesContainer>
@@ -38,6 +55,7 @@ export default function FinalizarCompra() {
                 funcao={() => finalizaCompras()}
                 label={'Finalizar'}
                 name={'finalizar'}
+                disabled={carrinhoVazio}
             />
         </FinalizarCompraContainer>
     )
