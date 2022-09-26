@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons'
 import { Context } from '../../context/CtxApp'
 import Erro404 from '../../assets/images/404.svg'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CardFilme({ titulo, data, generos, nota, capa, index, capaMinificada }) {
     const { filmeFav, setFilmeFav, filmeCarrinho, setFilmeCarrinho } = useContext(Context)
@@ -24,6 +26,10 @@ export default function CardFilme({ titulo, data, generos, nota, capa, index, ca
     useEffect(() => {
         AdcFilmeFavoritado()
     }, [filmeFav])
+
+    const notify = () => toast.error('Filme já está na lista de favoritos!', {
+        position: toast.POSITION.TOP_RIGHT
+    });
 
     //Formata a data para dia, mes extenso e ano
     const formataData = () => {
@@ -91,7 +97,7 @@ export default function CardFilme({ titulo, data, generos, nota, capa, index, ca
         }
         //Valida se o filme já estava favoritado e envia mensagem de erro
         else if (filmeArmazenado(filmeFav) === true && tipo === 'filmesFav') {
-            alert('teste')
+            notify()
         }
         //Valida se o filme ja estava no carrinho, entao soma 1 na quantidade
         else if (filmeArmazenado(filmeCarrinho) === true) {

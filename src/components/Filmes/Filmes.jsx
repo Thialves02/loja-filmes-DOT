@@ -6,6 +6,7 @@ import { Context } from '../../context/CtxApp';
 import axios from 'axios';
 import Loading from '../Loading/Loading';
 import MensagemInformativa from '../BuscaSemResultado/BuscaSemResultado';
+import { ToastContainer } from 'react-toastify';
 
 export default function Filmes() {
     const { defaultURL, API_KEY, pagina, setPagina, filmes, setFilmes, query, hasMore, setHasMore } = useContext(Context)
@@ -51,6 +52,8 @@ export default function Filmes() {
 
     return (
         <FilmesContainer>
+
+            <ToastContainer />
             <InfiniteScroll
                 dataLength={filmes.length}
                 next={atualizaPaginacao}
