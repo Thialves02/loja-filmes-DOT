@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { media } from "../../assets/styles/media"
 
 export const NavbarContainer = styled.header`
     position:fixed ;
@@ -9,8 +10,12 @@ export const NavbarContainer = styled.header`
     align-items:center;
     justify-content:space-between;
     height:60px;
-    padding:0 20px ;
+    padding:0 40px;
     z-index:5;
+
+    ${media('mobile')}{
+        padding:0 20px;
+    }
 
     img{
         height:80px;
@@ -31,6 +36,7 @@ export const InputContainer = styled.div`
         border-radius:5px;
         border: 2px solid #97bec2;
         padding:0 10px;
+        outline:none;
     }
 
     svg {
