@@ -6,16 +6,17 @@ import InputMask from 'react-input-mask';
 export default function Input({ name, label, type, mask, ...rest }) {
     return (
         <InputContainer {...rest}>
-            <Field name={name} type={type}
-                render={({ field }) => (
+            <Field name={name} type={type}>
+                {({ field, form, meta }) => (
                     <InputMask
                         {...field}
                         mask={mask}
                         type="text"
                         required
                     />
-                )} />
-            <label for={name}>{label}</label>
+                )}
+            </Field>
+            <label htmlFor={name}>{label}</label>
             <ErrorMessage
                 component="span"
                 name={name}

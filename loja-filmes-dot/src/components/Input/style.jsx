@@ -45,7 +45,7 @@ export const InputContainer = styled.div`
         }
 
         &:focus ~ label, &:valid ~ label{
-            top:-.7rem;
+            top:-.6rem;
             left:.5rem;
             font-size:17px;
             background-color:#fff ;
@@ -60,11 +60,11 @@ export const InputContainer = styled.div`
 
     
 
-    label{
+    label {
         font-size:20px;
         position:absolute;
         left:1rem ;
-        top:.4rem ;
+        top:.3rem ;
         padding:0 .25rem;
         z-index:1;
         color:#97bec2 ;
