@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { media } from "../../assets/styles/media"
 
 export const CardContainer = styled.div`
+    /* position: relative; */
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -15,8 +16,13 @@ export const CardContainer = styled.div`
 
     h2 {
         text-align:center;
-        font-size:20px;
-        padding:0 5px ;
+        font-size:22px;
+        padding:0 10px ;
+        margin-top:10px ;
+    }
+
+    p {
+        font-weight:bold ;
     }
 
     button {
@@ -47,10 +53,36 @@ export const ImageContainer = styled.figure`
         color: #4b5c6b;
         cursor: pointer;
         transition: all ease .3s ;
-    }
 
-    svg:hover{
-        color: red;
+        @keyframes adcFilmeFavorito {
+            50%{
+                transform:scale(1.3)
+            }
+
+            100%{
+                transform:scale(1)
+            }
+        }
+
+        :hover{
+            color: red;
+        }
+
+        &.favoritado {
+            color: red;
+            animation:1.5s adcFilmeFavorito ease;
+
+            
+            :hover{
+                color: #4b5c6b;
+            }
+
+            ${media('mobile')}{
+                :hover{
+                    color: red;
+                }
+            }
+        }
     }
 
     figcaption {
@@ -70,7 +102,7 @@ export const InfosContainer = styled.div`
     align-items:center;
     justify-content:space-around ;
     width:70%;
-
+    flex-wrap:wrap;
 `
 
 export const RatingContainer = styled.div`
