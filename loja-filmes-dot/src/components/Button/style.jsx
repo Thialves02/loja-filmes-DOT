@@ -10,4 +10,18 @@ export const ButtonContainer = styled.button`
     cursor: pointer;
     font-size:17px;
     font-weight:bold;
+    transition: all ease .5s ;
+
+    &.grande{
+        width:100%;
+    }
+
+    :hover {
+        background-color: #3c3497;
+    }
+
+    :disabled {
+	    background-color: #2b2660;
+        cursor: default;
+    }
 `
