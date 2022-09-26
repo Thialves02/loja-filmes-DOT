@@ -1,34 +1,78 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Api } from '../../api/Api'
 import CardFilme from '../CardFilme/CardFilme'
 import { FilmesContainer } from './style'
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Context } from '../../context/CtxApp';
+import axios from 'axios';
+import { SemResultadoContainer } from '../BuscaSemResultado/style';
+import BuscaSemResultado from '../BuscaSemResultado/BuscaSemResultado';
+import Loading from '../Loading/Loading';
+import MensagemInformativa from '../BuscaSemResultado/BuscaSemResultado';
 
 export default function Filmes() {
-    const [filmes, setFilmes] = useState([])
-    useEffect(() => {
-        getAllMovies()
-    }, [])
+    const { defaultURL, API_KEY, pagina, setPagina, filmes, setFilmes, query, hasMore, setHasMore } = useContext(Context)
 
-    const getAllMovies = async () => {
-        const response = await Api.getAll(`movie/popular?api_key=83a924a233a6fae4e8bb3ece72e1dcd0&language=pt-BR&page=1`)
-        const body = await response.json()
-        console.log(body)
-        setFilmes(body.results)
+    useEffect(() => {
+        filmesPopulares()
+    }, [query == ''])
+
+    useEffect(() => {
+
+    }, [filmes])
+
+    const filmesPopulares = async () => {
+        const response = await axios.get(`${defaultURL}movie/popular?api_key=${API_KEY}&language=pt-BR&page=1`)
+        setFilmes(response.data.results)
+    }
+
+    const paginacaoFilmesPopulares = async () => {
+        const response = await axios.get(`${defaultURL}movie/popular?api_key=${API_KEY}&language=pt-BR&page=${pagina}`)
+        return response.data.results
+    }
+
+    const paginacaoFilmesPesquisados = async () => {
+        const response = await axios.get(`${defaultURL}search/movie?api_key=${API_KEY}&language=pt-BR&query='${query}'&page=${pagina}`)
+        return response.data.results
+    }
+
+    const atualizaPaginacao = async () => {
+        setPagina(previusState => previusState + 1);
+        const novosFilmes = query == '' ? await paginacaoFilmesPopulares() : await paginacaoFilmesPesquisados()
+        setHasMore(novosFilmes.length)
+        setFilmes([...filmes, ...novosFilmes]);
+    };
+
+    const existeMaisPaginas = () => {
+        return hasMore === 0 ? false : true
     }
 
     return (
         <FilmesContainer>
-            {filmes.map((filme, index) => (
-                <CardFilme
-                    key={index}
-                    titulo={filme.title}
-                    nota={filme.vote_average}
-                    data={filme.release_date}
-                    generos={filme.genre_ids}
-                    capa={filme.poster_path}
-                    capaMinificada={filme.backdrop_path}
-                />
-            ))}
+            <InfiniteScroll
+                dataLength={filmes.length}
+                next={atualizaPaginacao}
+                hasMore={existeMaisPaginas()}
+                loader={<Loading />}
+                endMessage={
+                    <MensagemInformativa
+                        label={'A busca não retornou mais resultados!'}
+                    />
+                }
+            >
+                {filmes?.map((filme, index) => (
+                    <CardFilme
+                        index={index}
+                        titulo={filme.title}
+                        nota={filme.vote_average}
+                        data={filme.release_date}
+                        generos={filme.genre_ids}
+                        capa={filme.poster_path}
+                        capaMinificada={filme.backdrop_path}
+                    />
+                ))}
+            </InfiniteScroll>
+
         </FilmesContainer>
     )
 }

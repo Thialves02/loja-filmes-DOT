@@ -1,15 +1,17 @@
 import styled from "styled-components"
 import { media } from "../../assets/styles/media"
 
-export const FilmesContainer = styled.main`
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
+export const FilmesContainer = styled.section`
     width:80%;
 
-    ${media('mobile')}{
-        width:100%;
-        justify-content:center;
+    div:first-child{
+        display:flex;
+        flex-wrap:wrap ;
+        justify-content:center ;
+
+        ${media('mobile')}{
+            /* width:100%; */
+            justify-content:center;
+        }
     }
 `
