@@ -6,15 +6,7 @@ import ValorTotal from '../ValorTotal/ValorTotal'
 import { FilmesContainer, FinalizarCompraContainer, InfosContainer } from './style'
 
 export default function FinalizarCompra() {
-    const { filmeCarrinho, finalizaCompra } = useContext(Context)
-    const [carrinhoVazio, setCarrinhoVazio] = useState()
-
-    useEffect(() => { verificaCarrinho() }, [filmeCarrinho])
-
-    //Validação para bloquear compra caso não exista itens no carrinho
-    const verificaCarrinho = () => {
-        return filmeCarrinho?.length === 0 || filmeCarrinho === null ? setCarrinhoVazio(true) : setCarrinhoVazio(false)
-    }
+    const { filmeCarrinho, finalizaCompra, carrinhoVazio, setCarrinhoVazio } = useContext(Context)
 
     //Faz o submit do form
     const finalizaCompras = () => {
@@ -55,7 +47,6 @@ export default function FinalizarCompra() {
                 funcao={() => finalizaCompras()}
                 label={'Finalizar'}
                 name={'finalizar'}
-                disabled={carrinhoVazio}
             />
         </FinalizarCompraContainer>
     )

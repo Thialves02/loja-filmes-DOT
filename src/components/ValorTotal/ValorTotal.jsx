@@ -1,10 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../context/CtxApp'
 import Button from '../Button/Button'
 import { PrecoContainer, ValorTotalContainer } from './style'
 
 export default function ValorTotal({ name, label, type, funcao, disabled, ...rest }) {
-    const { precoTotal } = useContext(Context)
+    const { filmeCarrinho, precoTotal, carrinhoVazio, setCarrinhoVazio } = useContext(Context)
+
+    useEffect(() => { verificaCarrinho() }, [filmeCarrinho])
+
+    //Verifica se existem filmes no carrinho
+    const verificaCarrinho = () => {
+        return filmeCarrinho?.length === 0 || filmeCarrinho === undefined ? setCarrinhoVazio(true) : setCarrinhoVazio(false)
+    }
+
     return (
         <ValorTotalContainer {...rest}>
             <PrecoContainer>
@@ -17,7 +25,7 @@ export default function ValorTotal({ name, label, type, funcao, disabled, ...res
                 type={type}
                 onClick={funcao}
                 className={'grande'}
-                disabled={disabled}
+                disabled={carrinhoVazio}
             />
         </ValorTotalContainer>
     )

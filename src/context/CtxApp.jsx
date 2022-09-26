@@ -19,6 +19,7 @@ export default function CtxApp({ children }) {
     const [filmes, setFilmes] = useState([])
     const [query, setQuery] = useState('')
     const [hasMore, setHasMore] = useState(1)
+    const [carrinhoVazio, setCarrinhoVazio] = useState()
 
     return (
         <Context.Provider
@@ -26,7 +27,7 @@ export default function CtxApp({ children }) {
                 defaultURL, API_KEY, filmeFav, setFilmeFav, filmeFavRemove, filmeCarrinho, setFilmeCarrinho, filmeCarrinhoRemove,
                 abreFavoritos, setAbreFavoritos, abreCarrinho, setAbreCarrinho, abreMenuLateral, setAbreMenuLateral, precoTotal,
                 setPrecoTotal, finalizaCompra, dadosUsuario, setDadosUsuario, pagina, setPagina, filmes, setFilmes, query, setQuery,
-                hasMore, setHasMore
+                hasMore, setHasMore, carrinhoVazio, setCarrinhoVazio
             }}
         >
             {children}
