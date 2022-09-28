@@ -47,10 +47,6 @@ $ git clone https://github.com/Thialves02/loja-filmes-DOT.git
 # Instalar as dependências
 $ yarn install
 $ npm install
-
-# Para rodar testes unitários (Opcional)
-$ yarn test
-$ npm test
 ```
 
 3.Rode a aplicação
